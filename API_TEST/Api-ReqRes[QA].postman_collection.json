@@ -1,0 +1,227 @@
+{
+	"info": {
+		"_postman_id": "ac394455-034d-45de-8658-88ec0906a09b",
+		"name": "Api-ReqRes[QA]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28997129",
+		"_collection_link": "https://blue-shuttle-529788.postman.co/workspace/QA~dfdc59e6-1de6-46ca-b82b-22a5ed1f305c/collection/28997129-ac394455-034d-45de-8658-88ec0906a09b?action=share&source=collection_link&creator=28997129"
+	},
+	"item": [
+		{
+			"name": "GET",
+			"item": [
+				{
+					"name": "200",
+					"item": [
+						{
+							"name": "tc_001_List Users",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/users",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "tc_002_Get Single User",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/api/users/2",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "tc_006_Login Successful",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"eve.holt@reqres.in\",\r\n    \"password\": \"cityslicka\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"login"
+									]
+								},
+								"description": "\n### API Request Description\n\nThis endpoint allows users to log in by sending a POST request to the specified URL. The request should include the user's email and password in the request body.\n\n#### Request Body\n- `email` (string): The email address of the user.\n- `password` (string): The password associated with the user's account.\n\n### API Response\n\nThe response to this request will be in JSON format and should be documented as a JSON schema.\n"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "POST",
+			"item": [
+				{
+					"name": "400",
+					"item": [
+						{
+							"name": "tc_004_Login Unsuccessful",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"eve.holt@reqres.in\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/login",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "201",
+					"item": [
+						{
+							"name": "tc_005_Create",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const name =\"morpheus\";\r",
+											"pm.environment.set(\"name\", name);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"{{name}}\",\r\n    \"job\": \"leader\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/api/users",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"api",
+										"users"
+									]
+								},
+								"description": "\n### Create User\n\nThis endpoint is used to create a new user.\n\n#### Request Body\n- `name` (string, required): The name of the user.\n- `job` (string, required): The job of the user.\n\n#### Response\nThe response of this request is a JSON schema representing the user details, including the `id`, `name`, `job`, `createdAt`, and `updatedAt` properties.\n\n```json\n{\n    \"type\": \"object\",\n    \"properties\": {\n        \"id\": {\n            \"type\": \"string\"\n        },\n        \"name\": {\n            \"type\": \"string\"\n        },\n        \"job\": {\n            \"type\": \"string\"\n        },\n        \"createdAt\": {\n            \"type\": \"string\",\n            \"format\": \"date-time\"\n        },\n        \"updatedAt\": {\n            \"type\": \"string\",\n            \"format\": \"date-time\"\n        }\n    }\n}\n```\n"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
